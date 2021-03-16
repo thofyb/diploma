@@ -1,0 +1,149 @@
+\input{header.tex}
+\input{header2.tex}
+
+\usepackage{caption}
+\usepackage{listings}
+
+\DeclareCaptionFont{white}{ \color{white} }
+\DeclareCaptionFormat{listing}{
+    \parbox{\textwidth}{\hspace{15pt}#1#2#3}
+}
+\captionsetup[lstlisting]{ format=listing
+  %, labelfont=white, textfont=white
+  , singlelinecheck=false, margin=0pt, font={bf}
+}
+
+\begin{document}
+\input{title.tex}
+\maketitle
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+% \begin{abstract}
+%   В курсаче не нужен
+% \end{abstract}
+
+\section{Введение (обязателен к Новому году)}
+\input{intro.tex}
+
+\section{Постановка задачи (обязателен к Новому году)}
+\label{sec:task}
+\input{task.tex}
+
+\section{Обзор (обязателен к новому году)}
+\input{related.tex}
+
+\section{Background (опционально)}
+TODO
+
+
+\section{Метод}
+Реализация в широком смысле: что таки было сделано. Скорее всего самый большой раздел.
+
+\emph{Крайне желательно} к Новому году иметь что-то, что сюда можно написать.
+
+
+\subsection{Основные грабли}
+Здесь мы будем собирать основные ошибки, которые случаются при написании текстов.
+
+
+\begin{lstlisting}[caption=Название, language=Caml, frame=single]
+let x = 5 in x+1
+\end{lstlisting}
+
+\subsection{Выделения куска листинга с помощью tikz}
+\url{https://tex.stackexchange.com/questions/284311}
+
+\begin{lstlisting}[escapechar=!,basicstyle=\ttfamily]
+#include <stdio.h>
+#include <math.h>
+
+int main () {
+  double c=-1;
+  double z=0;
+  int i;
+
+  printf (``For c = %lf:\n'', c );
+  for ( i=0; i<10; i++ ) {
+    printf ( !\tikzmark{a}!"z %d = %lf\n"!\tikzmark{b}!, i, z );
+    z = pow(z,2) + c;
+  }
+}
+\end{lstlisting}
+
+\begin{tikzpicture}[use tikzmark]
+\draw[fill=gray,opacity=0.1]
+  ([shift={(-3pt,2ex)}]pic cs:a) 
+    rectangle 
+  ([shift={(3pt,-0.65ex)}]pic cs:b);
+\end{tikzpicture}
+
+
+\section{Эксперимент}
+Как мы проверяем, что  всё удачно получилось
+
+\subsection{Условия эксперимента}
+Железо (если актуально); входные данные, на которых проверяем наш подход; почему мы выбрали именно эти тесты
+
+\subsection{Исследовательские вопросы (Research questions)}
+Надо сформулировать то, чего мы хотели бы добиться работой (2 штуки будет хорошо):
+
+\begin{itemize}
+\item Хотим алгоритм, который лучше вот таких-то остальных
+\item Если в подходе можно включать/выключать составляющие, то насколько существенно каждая составляющая влияет на улучшения
+\item Если у нас строится приближение каких-то штук, то на сколько точными будут эти приближения
+\item и т.п.
+\end{itemize}
+
+\subsection{Метрики}
+
+Как мы сравниваем, что результаты двух подходов лучше или хуже
+\begin{itemize}
+\item Производительность
+\item Строчки кода
+\item Как часто алгоритм "угадывает" правильную классификацию входа
+\end{itemize}
+
+Иногда метрики вырожденные (да/нет), это не очень хорошо, но если в области исследований так принято, то ладно.
+
+\subsection{Результаты}
+Результаты понятно что такое. Тут всякие таблицы и графики
+
+В этом разделе надо также коснуться Research Questions.
+
+\subsubsection{RQ1} Пояснения
+\subsubsection{RQ2} Пояснения
+
+\subsection{Обсуждение результатов}
+
+Чуть более неформальное обсуждение, то, что сделано. Например, почему метод работает лучше остальных? Или, что делать со случаями, когда метод классифицирует вход некорректно.
+
+\section{Применение того, что сделано на практике (опциональный)}
+
+Если применение в лоб не работает, потому что всё изложено чуть более сжато и теоретично, надо рассказать тонкости и правильный метод применения результатов. 
+
+\section{Угрозы нарушения корректности (опциональный)}
+
+Если основная заслуга метода, это то, что он дает лучшие цифры, то стоит сказать, где мы могли облажаться, когда проводили численные замеры. 
+
+\section{Заключение (обязательно в осеннем семестре)}
+
+Кратко, что было сделано. Также здесь стоит писать задачи на будущее.
+
+\textbf{Для практик/ВКР.} Также важно сделать список результатов, который будет один к одному соответствовать задачам из раздела~\ref{sec:task}.
+
+\begin{itemize}
+\item Результат к задаче 1 
+\item Результат к задаче 2
+\item и т.д.
+\end{itemize}
+\noindent Для промежуточных отчетов сюда важно записать какие задачи уже были сделаны за осенний семестр, а какие только планируется сделать.
+
+Также сюда можно писать планы развития работы в будущем, или, если их много, выделять под это отдельную главу.
+
+
+% \nocite{*}
+\setmonofont[Mapping=tex-text]{CMU Typewriter Text}
+\bibliographystyle{ugost2008ls}
+\bibliography{vkr}
+\end{document}
